@@ -7,7 +7,7 @@ import io.micronaut.http.annotation.Get
 import io.micronaut.http.annotation.Post
 import io.micronaut.validation.Validated
 import io.micronaut.http.annotation.Body
-import javax.validation.Valid
+import javax.validation.constraints.NotNull
 
 @Controller("/calculator")
 @Validated
@@ -19,18 +19,16 @@ class MathController {
     }
 
     @Post("/add", produces = [MediaType.APPLICATION_JSON])
-    fun add(@Body @Valid request: Numbers): HttpResponse<AddResponse> {
-        val result = request.first + request.second
-        val response = AddResponse(result)
-        return HttpResponse.ok(response)
+    fun add(@Body @NotNull numbers: Numbers): HttpResponse<AddResponse> {
+        
+        return HttpResponse.ok("""{"result": ${numbers.first + numbers.second} }""")
     }
-    data class AddResponse(val result: Int)
+   
 
     @Post("/subtract", produces = [MediaType.APPLICATION_JSON])
-    fun subtract(@Body @Valid request: Numbers): HttpResponse<SubtractResponse> {
-         val result = request.first - request.second
-        val response = SubtractResponse(result)
-        return HttpResponse.ok(response)
+    fun subtract(@Body @NotNull numbers: Numbers): HttpResponse<SubtractResponse> {
+         
+        return HttpResponse.ok("""{"result": ${numbers.first - numbers.second} }""")
     }
-     data class SubtractResponse(val result: Int)
+     
 }
