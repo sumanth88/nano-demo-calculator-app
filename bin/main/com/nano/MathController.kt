@@ -19,14 +19,14 @@ class MathController {
     }
 
     @Post("/add", produces = [MediaType.APPLICATION_JSON])
-    fun add(@Body @NotNull numbers: Numbers): HttpResponse<AddResponse> {
+    fun add(@Body @NotNull numbers: Numbers): HttpResponse<String> {
         
         return HttpResponse.ok("""{"result": ${numbers.first + numbers.second} }""")
     }
    
 
     @Post("/subtract", produces = [MediaType.APPLICATION_JSON])
-    fun subtract(@Body @NotNull numbers: Numbers): HttpResponse<SubtractResponse> {
+    fun subtract(@Body @NotNull numbers: Numbers): HttpResponse<String> {
          
         return HttpResponse.ok("""{"result": ${numbers.first - numbers.second} }""")
     }
